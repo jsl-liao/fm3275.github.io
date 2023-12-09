@@ -1,4 +1,4 @@
 jeff liao's publishing page
 email: fm3275.outlook.com
-native language: chinesse
+native language: chinese
 location: taipei

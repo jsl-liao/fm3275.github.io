@@ -1,3 +1,10 @@
+## v.04
+> date: 2023/12/21
+
+revision:
+1. 打開 app 先取得 get(systemLanguage) 的內容，並依此來設定導航欄的按鍵的顯示，及提示的顯示。
+如果取得的是 traditional chinese，會以繁體中文顯示；如果是 simplfied chinese 會以簡體中文顯示；如果是其他語言，則會以英文顯示。
+2. bug fix
 ## v.031
 > date: 2023/12/16
 1. 加入 Claris FileMaker 19 Data API Guide

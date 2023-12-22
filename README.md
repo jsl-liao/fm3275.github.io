@@ -16,3 +16,4 @@ FileMaker 資深使用者，並應用到一些日常事務
 > - [x] repo:[fm3275.github.io](https://github.com/jsl-liao/fm3275.github.io)
 > - [x] email:[fm3275](mailto:fm3275.outlook.com)
 > - [X] facebook:[fm3275](https://www.facebook.com/groups/169968827069208)
+> - [X] slack: fm3275

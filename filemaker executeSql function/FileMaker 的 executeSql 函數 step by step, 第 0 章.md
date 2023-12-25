@@ -1,6 +1,7 @@
 **FileMaker 的 executeSql 函數 step by step, 第 0 章**
+-------------------------------------------------
 
-**SELECT 敘述可以包含多個子句**
+### **SELECT 敘述可以包含多個子句**
 
     SELECT [ DISTINCT ] { * | column_expression [[AS] column_alias],...} 
     FROM table_name [ table_alias ], …
@@ -19,7 +20,7 @@ sql 查詢語句必要的兩部分構成，第一部分是要 "拿什麼" 資料
     SELECT table_column1, table_column2, table_column3...
     FROM table_name;
 
-**sqlQuery: sql 查詢語句, 只支援 select 查詢**
+### **sqlQuery: sql 查詢語句, 只支援 select 查詢**
 
 *   避免表名稱和欄位名稱和 sql 保留字衝突, 衝突發生雖可處理, 但應避免。
 *   欄位別名(使用 As 指定)用來語義化欄位或者用較短名稱來標示欄位。
@@ -44,17 +45,17 @@ sql 查詢語句必要的兩部分構成，第一部分是要 "拿什麼" 資料
 *   executeSql 不接受 emoji 的資料輸入。
 *   executeSql 的運算結果是文字類型資料, 即使是用 count, sum 取得的值, 不區分大小寫如果要與數字, 日期, 時間做比較, 都必須 getAsNumber, GetAsDate, ... 處理, 否則會發生邏輯性錯誤。
 
-fieldSeparator: 欄位分隔符號或稱為 column separator
+### fieldSeparator: 欄位分隔符號或稱為 column separator
 
 *   可以是任何文字。
 *   如果輸入"" 則使用內定值 ","。
 
-**rowSeparator: 記錄分隔符號, 區隔獲取的資料的不同紀錄**
+### **rowSeparator: 記錄分隔符號, 區隔獲取的資料的不同紀錄**
 
 *   可以是任何文字。
 *   如果輸入"" 則使用內定值 "¶" 即 return, char(13)。
 
-**arguments: 引數**
+### **arguments: 引數**
 
 *   用於 where 子句的鍵值。
 *   argument 的內含區分大小寫。
@@ -62,7 +63,7 @@ fieldSeparator: 欄位分隔符號或稱為 column separator
 *   sqlQuery 的 where 子句中的 "?” 依序對應於 arguments。
 *   where 子句依序取用 arguments, 多餘的 argument 被忽略。
 
-**executeSql 的應用**
+### **executeSql 的應用**
 
 *   獨立於上下文關係的運算, 非關係資料表的取值。
 *   減少關聯資料表。
@@ -72,7 +73,7 @@ fieldSeparator: 欄位分隔符號或稱為 column separator
 *   配合在 one record table 的欄位, 可以達成在 script 就完成 value List。
 *   取得外部檔案的資料表(未引入的資料表)的資料( 需要安裝必要的 Plugin )。
 
-executeSql 的應用時機  
+### executeSql 的應用時機  
 executeSql 的計算不是即時的, 是需要被觸發的
 
 *   不要應用到定義計算欄位的計算式, 除非 Store Options 設定為 "Do not store calculated results - -recalculate when needed"。
@@ -82,7 +83,7 @@ executeSql 的計算不是即時的, 是需要被觸發的
 *   或者 script trigger 中的計算式。
 *   產生常數儲存到 global field 或 global variable。
 
-**executeSql 的技巧**
+### **executeSql 的技巧**
 
 *   如果計算式太長, 可按照語句分開。
 *   利用 let 函數, 產生模組化, 彈性的計算式內容。

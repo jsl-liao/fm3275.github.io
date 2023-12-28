@@ -34,6 +34,8 @@ Inner join 也可以只寫 join
 
 在 contact 表中沒有公司名稱，而是指定 Join company On contact::idf = company::id ，透過這個指定，把 company.name 引進來。
 
+這是 Inner Join 只有在 Join company On contact::idf = company::id 這個條件成立的資料才會被傳回。
+
 ### 範例：2
 
     let (~query ="  
@@ -53,3 +55,23 @@ The column named "name" appears in more than one table in the column reference's
 如果兩張表裡有相同的欄位名稱，在敘述中被引用，必須加以完全表示，如範例：1
 
 有關於 debug 請參考第 14 章
+
+### 範例：3
+
+    let (
+    [
+    ~queryFake ="  Select company::name, contact::name, contact::nameEng, contact::addrCity, contact::addrStr 
+    From contact   
+    Left Join company On contact::idf = company::id   
+    Where contact::addrCity = ? 
+    Order By contact::addrStr, contact::name " ;
+    ~query = substitute ( ~queryFake ; "::" ; "." )
+    /* 被轉換成,
+    Select company.name, contact.name, contact.nameEng, contact.addrCity, contact.addrStr  From contact    Join company On contact.idf = company.id    Where contact.addrCity = ?  Order By contact.addrStr, contact.name 
+    */
+    ];
+    ExecuteSql ( ~query ; "" ; "" ; "台東縣" ))
+
+這是 Left Join，Left Table 只要符合 Where 子句的條件就會被傳回， 不一定要符合 Join company On contact::idf = company::id 這個條件。
+
+

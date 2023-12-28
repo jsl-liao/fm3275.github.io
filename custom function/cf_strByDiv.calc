@@ -1,0 +1,67 @@
+/*
+  • subject:
+    取處以 _div 作分隔的第 nth 個字串
+  • format:
+    cf_strByDiv ( _text; _div; _ifDivCase; _nth; _ifNoDivReturn )
+  • parameters:
+    _text: 用來取值的文字
+    _div: 分隔字元或字串
+    _ifDivCase: _div 是否區分大小寫
+    _nth: 第幾個
+    _ifNoDivReturn: true: 如果未發現 _div 是返回完整字串或, false: 返回""
+  • returns:
+    文字 或者 ""
+    如果沒有分隔字元, 則 return empty
+  • dependencies: on other cfs, variables, table, fields, scheme or ...
+    
+  • version:
+    v03
+  • date:
+    20231228
+  • update infomation:
+    
+  • notes:
+    Char(41166) 不可以出現要檢查的內容中
+  • repo:
+    
+  • initial:
+    20220212
+  • by:
+    jeff liao
+*/
+
+Case (
+  _text = "" ; "" ;
+  _div = "" ; "" ;
+  Filter ( _nth ; "0123456789") <>  _nth ; "" ;
+  Filter ( _nth ; "0123456789") = _nth and not _nth > 0 ; "" ;
+  Let (
+    [
+      ~colSep = "«" & Char(41166) & "»" ;
+      ~ifCase = If ( _ifDivCase = True ; 1 ; 0 );
+      ~txt = If ( ~ifCase ; Substitute ( _text ; _div ; ~colSep ); _text );
+      ~div = If ( ~ifCase ; ~colSep ; _div );
+      ~lenDiv = Length ( ~div );
+      ~ifLeadDiv = If ( Left ( ~txt ; ~lenDiv ) = ~div ; 1 ; 0 );
+      ~ifTailDiv = If ( Right ( ~txt ; ~lenDiv ) = ~div ; 1 ; 0 );
+      ~max = PatternCount ( ~txt ; ~div ) + 1 ;
+      ~max = If ( ~ifLeadDiv ; ~max - 1 ; ~max );
+      ~max = If ( ~ifTailDiv ; ~max - 1 ; ~max )
+    ];
+    Case ( 
+      PatternCount ( ~txt ; ~div ) = 0 ; 
+        If ( _ifNoDivReturn = 1 ; _text ; "" ) ; 
+      _nth > ~max ; "" ;
+      Let ( 
+        [
+          ~txt = If ( ~ifLeadDiv ; ~txt ; ~div & ~txt );
+          ~txt = If ( ~ifTailDiv ; ~txt ; ~txt & ~div );
+          ~startPos = Position ( ~txt ; ~div ; 1 ; _nth ) + ~lenDiv ;
+          ~endPos = Position ( ~txt ; ~div ; ~startPos ; 1 );
+          ~len = ~endPos - ~startPos
+        ];
+        Middle ( ~txt ; ~startPos ; ~len )
+      )
+    )
+  )
+)

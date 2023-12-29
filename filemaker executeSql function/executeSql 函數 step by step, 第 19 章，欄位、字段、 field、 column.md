@@ -19,3 +19,4 @@ executeSql 函數 step by step, 第 19 章，欄位、字段、 field、 column
 
 *   FileMaker 也支援科學符號表示的數字。
 *   date, timestamp 欄位 executeSql 取值會自動把日期轉為 yyyy-mm-dd 的格式內容。
+*   date, timestamp 欄位不支援 2 位數年度的寫法。

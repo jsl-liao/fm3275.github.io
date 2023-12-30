@@ -17,20 +17,13 @@ executeSql 函數 step by step, 第 20 章，常數
 範例：1
 
 ```
-let (
-  [
-    
+let ([
 ~query = "
-    
 Select  name, Int ( ( Date'" & get(currentDate) & "' - birthday ) / 365 ), '歲' 
 From contact 
 Where addrCity = '新竹市'
-    
-"
- ];
-  
-executeSql ( ~query ; char(9) ; "")
-)
+"];
+executeSql ( ~query ; char(9) ; ""))
 ```
 
 計算出年齡

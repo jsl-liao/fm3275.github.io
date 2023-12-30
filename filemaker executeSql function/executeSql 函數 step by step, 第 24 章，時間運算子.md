@@ -1,43 +1,14 @@
-executeSql 函數 step by step, 第 24 章，時間運算子
-----------------------------------------
+## executeSql 函數 step by step, 第 24 章，時間運算子
 
 日期計算的單位：秒。
 
 在下表中，time\_now 為 time '18:01:30'
 
-運算子
-
-對時間的影響
-
-示例
-
-結果
-
-+
-
-將秒數添加到時間
-
-time\_now + 100
-
-time '18:12:10'
-
-\-
-
-兩個時間之間差異
-
-time\_now - time '14:01:01'
-
-time '04:09:29'
-
-從秒數中減去秒數
-
-time\_now - 100
-
-time '18:08:50'  
+<table style="width: auto; text-align: start;"><tbody><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">運算子</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">對時間的影響</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">示例</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">結果</td></tr><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">+</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">將秒數添加到時間</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time_now + 100</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time '18:12:10'</td></tr><tr><td colspan="1" rowspan="2" width="auto" style="text-align: left;">-</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">兩個時間之間差異</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time_now - time '14:01:01'</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time '04:09:29'</td></tr><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">從秒數中減去秒數</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time_now - 100</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">time '18:08:50'<br></td></tr></tbody></table>
 
 範例：1
 
-```
+```auto
 // 第一個值: 兩個時間相減
 // 第二個值: 時間加 100 秒
 // 第三個值: 時間減 100 秒
@@ -53,3 +24,6 @@ From dev
 "];
 executeSql ( ~query ; ¶ ; ""))
 ```
+
+  
+

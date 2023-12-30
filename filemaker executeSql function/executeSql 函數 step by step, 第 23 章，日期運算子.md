@@ -1,49 +1,8 @@
-executeSql 函數 step by step, 第 23 章，日期運算子
-----------------------------------------
-
-日期計算的單位：天，日。
-
-在下表中，hire\_date 為 DATE '2028-01-30'
-
-運算子
-
-對日期的影響
-
-示例
-
-結果
-
-+
-
-將天數添加到日期
-
-hire\_date + 5
-
-DATE '2028-02-04'
-
-\-
-
-查找兩個日期之間的天數
-
-hire\_date - DATE '2028-01-01'
-
-29
-
-從日期中減去天數
-
-hire\_date - 10
-
-DATE '2028-01-20'  
-
-範例：1
-
-```
-// 取得年齡：
+<h2>executeSql 函數 step by step, 第 23 章，日期運算子</h2><p>日期計算的單位：天，日。</p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">在下表中，</span>hire_date<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 為 </span>DATE '2028-01-30'</p><table style="width: auto; text-align: start;"><tbody><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">運算子</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">對日期的影響</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">示例</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">結果</td></tr><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">+</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">將天數添加到日期</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">hire_date + 5</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">DATE '2028-02-04'</td></tr><tr><td colspan="1" rowspan="2" width="auto" style="text-align: left;">-</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">查找兩個日期之間的天數</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">hire_date - DATE '2028-01-01'</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">29</td></tr><tr><td colspan="1" rowspan="1" width="auto" style="text-align: left;">從日期中減去天數</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">hire_date - 10</td><td colspan="1" rowspan="1" width="auto" style="text-align: left;">DATE '2028-01-20'<br></td></tr></tbody></table><p>範例：1</p><pre><code >// 取得年齡：
 let ([ ~query = "
 Select  name, Int ( ( Date'" & get(currentDate) & "' - birthday ) / 365 ) 
 From contact 
 Where addrCity = '新竹市'
 "];
 executeSql ( ~query ; char(9) ; "")
-)
-```
+)</code></pre><p><br><br></p><p><br></p>

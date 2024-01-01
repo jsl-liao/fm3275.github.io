@@ -6,4 +6,5 @@ cf_listToAnother ( _valueList ; _to_sqlIn_csv_tsv_words_array )
 
 let (
 ~vl = cf_listToAnother ( contact::idList ; "sqlIn" );
-executeSql ("  Select name, nameEng, gender From contact Where id In (" & ~vl & ")  "; ",  " ; "" ))</code></pre><p><br></p>
+executeSql ("  Select name, nameEng, gender From contact Where id In (" & ~vl & ")  "; ",  " ; "" ))</code></pre><h3>範例 2：</h3><p>利用子查詢，列出在新北市，公司是以 "材料科技股份有限公司"結尾的員工資料</p><pre><code >executeSql ("Select name, nameEng, gender From contact Where idf In
+( Select id From company Where addrCity = '新北市' And name like '%材料科技股份有限公司' )"; ",  " ; "")</code></pre><p><br></p>

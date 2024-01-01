@@ -8,7 +8,7 @@ Select company.name, company.addrCity, contact.name, contact.nameEng
 From contact 
 Join company On contact.idf = company.id 
 Where company.addrCity = '新北市' And contact.nameEng Between 'A' And 'F' And contact.stroke Between 20 And 22
-"; Char(9) ; "" )</code></pre><p><span style="color: rgb(0, 0, 0);">找出公司地址在新北市，姓的筆畫數在 20 到 22 劃之間，而且英文名字是以 A ~ F 開頭的人。</span></p><p><span style="color: rgb(0, 0, 0);">為了能夠更容易閱讀和理解，可以用括號把條件區隔開，把計算式寫成如下：</span></p><pre><code >ExecuteSQL ( "
+"; Char(9) ; "" )</code></pre><p><span style="color: rgb(0, 0, 0);">找出公司地址在新北市，姓的筆畫數在 20 到 22 劃之間，而且英文名字是以 A ~ E 開頭的人（英文名字沒有單一個 F 的人）。</span></p><p><span style="color: rgb(0, 0, 0);">為了能夠更容易閱讀和理解，可以用括號把條件區隔開，把計算式寫成如下：</span></p><pre><code >ExecuteSQL ( "
 Select company.name, company.addrCity, contact.name, contact.nameEng 
 From contact 
 Join company On contact.idf = company.id 

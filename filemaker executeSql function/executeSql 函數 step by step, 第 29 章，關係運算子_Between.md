@@ -1,4 +1,4 @@
-<h2><span style="color: rgb(0, 0, 0);">executeSql 函數 step by step, 第 29 章，關係運算子_Between</span></h2><p style="text-align: start;"><strong>Between</strong> 則是用來限定依某範圍內連續的值作為條件來搜尋資料表中的特定資料。</p><p style="text-align: start;">作為查詢範圍條件的欄位型態可為數值、日期或字串，其中字串是依照字母排列順序來界定範圍。</p><h3 style="text-align: start;">範例 1：</h3><pre><code >ExecuteSQL ( "
+<h2><span style="color: rgb(0, 0, 0);">executeSql 函數 step by step, 第 29 章，關係運算子_Between</span></h2><p style="text-align: start;"><strong>Between</strong> 則是用來限定依某範圍內連續的值作為條件來搜尋資料表中的特定資料。</p><p style="text-align: start;">作為查詢範圍條件的欄位型態可為數值、日期或字串，其中字串是依照字母排列順序來界定範圍。</p><p style="text-align: start;"><strong>Not Between</strong> 是 <strong>Between</strong> 的否定形式。</p><h3 style="text-align: start;">範例 1：</h3><pre><code >ExecuteSQL ( "
 Select company.name, company.addrCity, contact.name, contact.nameEng 
 From contact 
 Join company On contact.idf = company.id 

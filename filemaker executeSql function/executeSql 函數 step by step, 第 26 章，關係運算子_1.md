@@ -2,9 +2,9 @@
 Select contact.name, contact.nameEng,contact.birthday 
 From contact 
 Where contact.birthday + 25*365 &gt; ?  And contact.addrCity = ?
-"; "" ; "" ; get(CurrentTimestamp); "台北市")</code></pre><p>找出年齡小於 25 歲，和以下的寫法幾乎得到相同的結果，差異在 &nbsp;24 小時內。</p><pre><code >ExecuteSQL ( "
+
+"; "" ; "" ; get(CurrentTimestamp); "台北市")</code></pre><p>找出年齡小於 25 歲，和以下的寫法幾乎得到相同的結果，差異在 &nbsp;24 小時內。</p><pre><code >ExecuteSQL ( "
 Select contact.name, contact.nameEng,contact.birthday 
 From contact 
 Where contact.birthday + 25*365 &gt; ?  And contact.addrCity = ?
-
 "; "" ; "" ; get(CurrentDate); "台北市")</code></pre><p><br></p>

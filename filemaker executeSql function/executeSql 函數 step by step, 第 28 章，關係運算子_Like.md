@@ -3,8 +3,8 @@ Select name, addrStr, webAddr
 From company 
 Where addrCity = '新北市' And name like '%材料科技%'
 "; char(9) ; "" )</code></pre><p>找出新北市的公司名稱中含 ”材料科技“ 的公司。</p><h3>範例 2：</h3><pre><code >ExecuteSQL ( "
-Select company.name, company.addrCity, contact.name, contact.nameEng 
-From contact 
-Join company On contact.idf = company.id 
-Where company.addrCity = '新北市' And contact.name like '趙_'
-"; Char(9) ; "" )</code></pre><p>找出在新北市工作，姓趙，名字是單字。</p>
+Select company.name, company.addrCity, contact.name, contact.nameEng 
+From contact 
+Join company On contact.idf = company.id 
+Where company.addrCity = '新北市' And contact.name like '趙_' 
+"; Char(9) ; "" )</code></pre><p>找出在新北市工作，姓趙，名字是單字。</p>

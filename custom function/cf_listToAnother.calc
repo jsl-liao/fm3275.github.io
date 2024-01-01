@@ -1,0 +1,64 @@
+/*
+  • subject:
+    把 filemaker 的 value list 轉成其他格式的資料
+  • format:
+    cf_listToAnother ( _valueList ; _to_sqlIn_csv_tsv_words_array )
+  • parameters:
+    _valueList: filemaker value list
+    _to_sqlIn_csv_tsv_words_array : 可以是
+      sqlIn: 會產生 sql in 的條件字串, 但不用用小括號括起來
+      csv: common separated value
+      tsv: tab separated value
+      words: space separated string ( default )
+      array: json array
+  • returns:
+    
+  • dependencies: on other cfs, variables, table, fields, scheme or ...
+    
+  • version:
+    v01
+  • date:
+    20240101
+  • update infomation:
+    
+  • notes:
+    
+  • repo:
+    
+  • initial:
+    20240101
+  • by:
+    jeff liao
+*/
+
+let (
+  [
+    /*
+    _valueList = contact::idList;
+    _to_sqlIn_csv_tsv_words_array = "w" ;
+    */
+    ~to = case ( 
+      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "a" ; "array" ; 
+      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "c" ; "csv" ; 
+      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "t" ; "tsv" ; 
+      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "s" ; "sqlIn" ; 
+      "words" );
+    ~toRep = case ( 
+      ~to = "array" ;  "\",\"" ;
+      ~to = "csv" ;  "," ;
+      ~to = "tsv" ;  char(9) ;
+      ~to = "sqlIn"; "','" ;
+      " " );
+    ~prefix = case ( 
+      ~to = "array" ; "[\"" ; 
+      ~to = "sqlIn" ; "'" ;
+      "" );
+    ~trail = case (
+      ~to = "array" ; "\"]" ; 
+      ~to = "sqlIn" ; "'" ;
+      "" );
+    ~vl = if ( right ( _valueList ; 1 ) = ¶ ; left ( _valueList ; length( _valueList ) - 1 ); _valueList );
+    endInitial = true
+  ];
+  ~prefix & substitute ( ~vl ; ¶ ; ~toRep ) & ~trail
+)

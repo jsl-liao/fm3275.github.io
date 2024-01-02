@@ -1,0 +1,5 @@
+<h2 style="text-align: start;">executeSql 函數 step by step, 第 33 章，邏輯運算子</h2><p>邏輯運算子<span style="color: rgb(0, 0, 0);"> </span><span style="color: rgb(0, 0, 0);"><strong>And </strong></span><span style="color: rgb(0, 0, 0);">和 </span><span style="color: rgb(0, 0, 0);"><strong>Or</strong></span><span style="color: rgb(0, 0, 0);"> </span><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">可以合併兩個或更多條件。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">如果運算是較為複雜，可以用小括號把數個條件分隔開來，便於檢視和除錯。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">範例：</span></p><pre><code >executeSql ("
+Select name, nameEng, gender 
+From contact 
+Where idf In
+( Select id From company Where (addrCity = '新北市') And (name like '%材料科技股份有限公司') )"; ",  " ; "")</code></pre><p><br></p>

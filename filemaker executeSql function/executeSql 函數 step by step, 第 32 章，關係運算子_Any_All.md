@@ -9,27 +9,27 @@ From contact ct
 Join company cy On ct.idf = cy.id 
 Where cy.name = '二路玩工業有限公司')
 "; "" ; "")</code></pre><p><span style="color: rgb(0, 0, 0);">第 2 種寫法:</span></p><pre><code >ExecuteSQL ( "
-Select y.name, t.name, t.nameEng, t.age 
-From contact t 
-Join company y On t.idf = y.id 
-Where y.name = '轉機事材料科技有限公司' And t.age &gt; Any (
+Select y.name, c.name, c.nameEng, c.age 
+From contact c 
+Join company y On c.idf = y.id 
+Where y.name = '轉機事材料科技有限公司' And c.age &gt; Any (
 Select c.age 
 From contact c 
-Join company cy On c.idf = cy.id 
-Where cy.name = '二路玩工業有限公司')
+Join company y On c.idf = y.id 
+Where y.name = '二路玩工業有限公司')
 "; "" ; "")</code></pre><p><span style="color: rgb(0, 0, 0);">第 3 種寫法:</span></p><p><span style="color: rgb(0, 0, 0);">cf_listToAnother 可以在 custom function 的 folder 中找到 </span></p><pre><code >let ([
 ~inVl = executeSql("
 Select c.age 
 From contact c 
-Join company cy On c.idf = cy.id 
-Where cy.name = '二路玩工業有限公司'
+Join company y On c.idf = y.id 
+Where y.name = '二路玩工業有限公司'
 " ; "" ; "");
 ~inStr = cf_listToAnother ( ~inVl ; "sqlIn" ; "num")];  
 ExecuteSQL("
-Select y.name, t.name, t.nameEng, t.age 
-From contact t 
-Join company y On t.idf = y.id 
-Where y.name = '轉機事材料科技有限公司' And t.age &gt; Any ( " & ~inStr &"    )
+Select y.name, c.name, c.nameEng, c.age 
+From contact c 
+Join company y On c.idf = y.id 
+Where y.name = '轉機事材料科技有限公司' And c.age &gt; Any ( " & ~inStr &"    )
 " ; "" ; "" ))</code></pre><p>錯誤的寫法</p><pre><code >ExecuteSQL("
 Select company.name, contact.name, contact.nameEng, contact.age 
 From contact 

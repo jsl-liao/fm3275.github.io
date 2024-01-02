@@ -2,7 +2,7 @@
   • subject:
     把 filemaker 的 value list 轉成其他格式的資料
   • format:
-    cf_listToAnother ( _valueList ; _to_sqlIn_csv_tsv_words_array )
+    cf_listToAnother ( _valueList ; _to_sqlIn_csv_tsv_words_array ; _strOrNumber )
   • parameters:
     _valueList: filemaker value list
     _to_sqlIn_csv_tsv_words_array : 可以是
@@ -11,6 +11,7 @@
       tsv: tab separated value
       words: space separated string ( default )
       array: json array
+    _strOrNumber: 對 sqlIn 和 array 有區別是數字或者是字串, 如果不是 n 開頭都視為 str
   • returns:
     
   • dependencies: on other cfs, variables, table, fields, scheme or ...
@@ -24,41 +25,49 @@
   • notes:
     
   • repo:
-    
+    /Volumes/MacHDD/MAMP/projects/cf/cf/cf_listToAnother.calc
   • initial:
     20240101
   • by:
     jeff liao
 */
 
-let (
+Let (
   [
     /*
     _valueList = contact::idList;
     _to_sqlIn_csv_tsv_words_array = "w" ;
+    _strOrNumber = "str"
     */
-    ~to = case ( 
-      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "a" ; "array" ; 
-      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "c" ; "csv" ; 
-      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "t" ; "tsv" ; 
-      left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "s" ; "sqlIn" ; 
+    ~strOrNumb = If ( Left (_strOrNumber ; 1 ) = "n" ; "num" ; "str" );
+    ~to = Case ( 
+      Left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "a" ; "array" ; 
+      Left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "c" ; "csv" ; 
+      Left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "t" ; "tsv" ; 
+      Left ( _to_sqlIn_csv_tsv_words_array ; 1 )  = "s" ; "sqlIn" ; 
       "words" );
-    ~toRep = case ( 
+    ~toRep = Case ( 
+      ~to = "array" and ~strOrNumb = "num" ; "," ;
       ~to = "array" ;  "\",\"" ;
       ~to = "csv" ;  "," ;
-      ~to = "tsv" ;  char(9) ;
+      ~to = "tsv" ;  Char(9) ;
+      ~to = "sqlIn" and ~strOrNumb = "num" ; "," ;
       ~to = "sqlIn"; "','" ;
       " " );
-    ~prefix = case ( 
+    ~prefix = Case ( 
+      ~to = "array" and ~strOrNumb = "num" ; "[" ; 
       ~to = "array" ; "[\"" ; 
+      ~to = "sqlIn" and ~strOrNumb = "num" ; "" ;
       ~to = "sqlIn" ; "'" ;
       "" );
-    ~trail = case (
+    ~trail = Case (
+      ~to = "array" and ~strOrNumb = "num" ; "]" ; 
       ~to = "array" ; "\"]" ; 
+      ~to = "sqlIn" and ~strOrNumb = "num" ; "" ;
       ~to = "sqlIn" ; "'" ;
       "" );
-    ~vl = if ( right ( _valueList ; 1 ) = ¶ ; left ( _valueList ; length( _valueList ) - 1 ); _valueList );
-    endInitial = true
+    ~vl = If ( Right ( _valueList ; 1 ) = ¶ ; Left ( _valueList ; Length( _valueList ) - 1 ); _valueList );
+    endInitial = True
   ];
-  ~prefix & substitute ( ~vl ; ¶ ; ~toRep ) & ~trail
+  ~prefix & Substitute ( ~vl ; ¶ ; ~toRep ) & ~trail
 )

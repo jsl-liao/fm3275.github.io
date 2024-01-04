@@ -1,40 +1,5 @@
-executeSql 函數 step by step, 第 9 章，Fetch First子句
------------------------------------------------
-
-**Fetch First** 子句以大於或等於 1 的無符號整數或者百分比的形式指示從 OFFSET 子句中指示的起點開始要返回的行數。
-
-格式為：
-
-    Fetch First [ n [ Percent ] ] { Rows | Row } {Only | Wtith Ties } ]
-
-**n** 是要返回的行數。如果省略 n，則默認值為 1。
-
-**n** 是大於或等於 1 的無符號整數，除非其後面是 PERCENT。如果 n 後面是 PERCENT，則值是正小數值或者是無符號整數。
-
-**Rows** 與 **Row** 相同。
-
-**With Ties**
-
-傳回 **Fetch First** 結果的最後一個位數繫結的資料列。 您必須搭配 **Order By** 子句使用這個引數。 **With Ties** 可能會導致傳回比 n 值更多的資料列。
-
-### 範例：1
-
-    ExecuteSQL ( "Select name, addrStr, addrCity From company Order By addrCity Fetch First 20 Rows Only" ; "" ; "" )
-
-沒有使用 **With Ties** 傳回剛剛好前 20 筆資料, 包括**南投縣的全部公司**和**台中市的****部分****公司**。
-
-### 範例：2
-
-    ExecuteSQL ( "
-    Select name, addrStr, addrCity From company Order By addrCity Fetch First 10 Percent Rows Only
-    " ; "" ; "" )
-
-沒有使用 **With Ties** 傳回剛剛好前 10% 的筆數資料, 包括**南投縣的全部公司**和**台中市的部分公司**。
-
-### 範例：3
-
-    ExecuteSQL ( "
-    Select name, addrStr, addrCity From company Order By addrCity Fetch First 20 Rows With Ties
-    " ; "" ; "" )
-
-使用 **With Ties** 傳回可能超過 20 筆的資料, 包括**南投縣的全部公司**和**台中市的全部公司**。
+<h2 style="text-align: start;"><span style="color: rgb(0, 0, 0);">executeSql 函數 step by step, 第 09 章，</span>Fetch First子句</h2><p><strong>Fetch First</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 子句以大於或等於 1 的無符號整數或者百分比的形式指示從 </span>OFFSET<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 子句中指示的起點開始要返回的行數。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">格式為：</span></p><pre><code >Fetch First [ n [ Percent ] ] { Rows | Row } {Only | Wtith Ties } ]</code></pre><p><strong>n</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 是要返回的行數。如果省略 </span>n<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">，則</span><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"><strong>默認值為 1</strong></span><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">。</span></p><p><strong>n</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 是大於或等於 1 的無符號整數，除非其後面是 </span><strong>Percent</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">。如果 </span>n<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 後面是 </span><strong>Percent</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">，則值是正小數值或者是無符號整數。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">使用 </span><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"><strong>Percent</strong></span><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 的執行效率較差，除非必要以直接寫 n Rows 較好。</span></p><p><strong>Rows</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 與 </span><strong>Row</strong><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 相同。</span></p><p><span style="color: rgb(0, 0, 0);"><strong>With Ties</strong></span></p><p><span style="color: rgb(0, 0, 0);">傳回</span><span style="color: rgb(0, 0, 0);"><strong> Fetch First </strong></span><span style="color: rgb(0, 0, 0);">結果的最後一個位數繫結的資料列。 您必須搭配 </span><span style="color: rgb(0, 0, 0);"><strong>Order By</strong></span><span style="color: rgb(0, 0, 0);"> 子句使用這個引數。 </span><span style="color: rgb(0, 0, 0);"><strong>With Ties</strong></span><span style="color: rgb(0, 0, 0);"> 可能會導致傳回比 n 值更多的資料列。</span></p><h3><span style="color: rgb(0, 0, 0);">範例：1</span></h3><p><span style="color: rgb(0, 0, 0);">沒有使用</span><span style="color: rgb(0, 0, 0);"><strong> With Ties </strong></span><span style="color: rgb(0, 0, 0);">傳回剛剛好前 20 筆資料, 包括</span><span style="color: rgb(0, 0, 0);"><strong>南投縣的全部公司</strong></span><span style="color: rgb(0, 0, 0);">和</span><span style="color: rgb(0, 0, 0);"><strong>台中市的部分公司</strong></span><span style="color: rgb(0, 0, 0);">。</span></p><pre><code >ExecuteSQL ( "Select name, addrStr, addrCity From company Order By addrCity Fetch First 20 Rows Only" ; "" ; "" )</code></pre><h3>範例：2</h3><p><span style="color: rgb(0, 0, 0);">沒有使用</span><span style="color: rgb(0, 0, 0);"><strong> With Ties </strong></span><span style="color: rgb(0, 0, 0);">傳回剛剛好前 10% 的筆數資料, 包括</span><span style="color: rgb(0, 0, 0);"><strong>南投縣的全部公司</strong></span><span style="color: rgb(0, 0, 0);">和</span><span style="color: rgb(0, 0, 0);"><strong>台中市的部分公司</strong></span><span style="color: rgb(0, 0, 0);">。</span></p><pre><code >ExecuteSQL ( "
+Select name, addrStr, addrCity From company Order By addrCity Fetch First 10 Percent Rows Only
+" ; "" ; "" )</code></pre><h3>範例：3</h3><p><span style="color: rgb(0, 0, 0);">使用</span><span style="color: rgb(0, 0, 0);"><strong> With Ties </strong></span><span style="color: rgb(0, 0, 0);">傳回可能超過 20 筆的資料, 包括</span><span style="color: rgb(0, 0, 0);"><strong>南投縣的全部公司</strong></span><span style="color: rgb(0, 0, 0);">和</span><span style="color: rgb(0, 0, 0);"><strong>台中市的全部公司</strong></span><span style="color: rgb(0, 0, 0);">。</span></p><pre><code >ExecuteSQL ( "
+Select name, addrStr, addrCity From company Order By addrCity Fetch First 20 Rows With Ties
+" ; "" ; "" )</code></pre><p><br></p>

@@ -1,24 +1,3 @@
-executeSql 函數 step by step, 第 8 章，Offset 子句
--------------------------------------------
-
-Offset 子句指示在開始返回數據之前要跳過的行數。如果 OFFSET 子句未在 SELECT 語句中使用，則起始行為 0。
-
-子查詢不支援 Offset。
-
-格式為：
-
-    Offset [ n {Rows | Row} ]
-
-`n` 是無符號整數。
-
-如果 `n` 大於結果集中返回的行數，則不返回任何內容，並且不顯示錯誤消息。
-
-ROWS 與 ROW 相同。
-
-範例：1
-
-    ExecuteSQL ( "
-    Select addrStr, addrCity, name From contact Where addrCity = ? Order By nameEng Offset 25 Rows
-    " ; "" ; "" ; "新北市" )
-
-獲得的前 25 筆資料被省略。
+<h2><span style="color: rgb(0, 0, 0);">executeSql 函數 step by step, 第 08 章，</span>Offset 子句</h2><p>Offset<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 子句指示在開始返回數據之前要跳過的行數。如果 </span>OFFSET<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 子句未在 </span>SELECT<span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;"> 語句中使用，則起始行為 0。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">子查詢不支援 Offset。</span></p><p><span style="color: rgb(51, 51, 51); background-color: rgb(250, 250, 250); font-size: 16px;">格式為：</span></p><pre><code >Offset [ n {Rows | Row} ]</code></pre><p style="text-align: start;"><code>n</code> 是無符號整數。</p><p style="text-align: start;">如果 <code>n</code> 大於結果集中返回的行數，則不返回任何內容，並且不顯示錯誤消息。</p><p style="text-align: start;"><span style="color: rgb(0, 0, 0);">ROWS 與 ROW 相同。</span></p><p style="text-align: start;"><span style="color: rgb(0, 0, 0);">範例：1</span></p><pre><code >ExecuteSQL ( "
+Select addrStr, addrCity, name From contact Where addrCity = ? Order By nameEng Offset 25 Rows
+" ; "" ; "" ; "新北市" )</code></pre><p>獲得的前 25 筆資料被省略。</p>

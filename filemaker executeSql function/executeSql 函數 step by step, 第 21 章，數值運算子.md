@@ -1,8 +1,1 @@
-executeSql 函數 step by step, 第 21 章，數字運算子
-----------------------------------------
-
-可以在數字表達式中包括以下運算子：+、-、\*、/ 和 ^ 或 \*\*（乘方）。
-
-可以在數值表達式的前面加上一元加號 (+) 或一元減號 (-)。
-
-科學符號可以和數字直接做運算。
+<h2>executeSql 函數 step by step, 第 21 章，數值運算子</h2><p style="text-align: start;">可以在數字表達式中包括以下運算子：+、-、*、/ 和 ^ 或 **（乘方）。</p><p style="text-align: start;">可以在數值表達式的前面加上一元加號 (+) 或一元減號 (-)。</p><p style="text-align: start;">科學符號可以和數字直接做運算。</p><table style="width: auto;"><tbody><tr><th colSpan="1" rowSpan="1" width="auto">數據類別</th><th colSpan="1" rowSpan="1" width="auto">運算</th><th colSpan="1" rowSpan="1" width="auto">結果</th><th colSpan="1" rowSpan="1" width="auto">範例</th><th colSpan="1" rowSpan="1" width="auto">備註</th></tr><tr><td colSpan="1" rowSpan="1" width="auto">日期</td><td colSpan="1" rowSpan="1" width="auto">+ 或 - 數值</td><td colSpan="1" rowSpan="1" width="auto">日期</td><td colSpan="1" rowSpan="1" width="auto">"Select date '2024/01/08' - 10 From dev"</td><td colSpan="1" rowSpan="1" width="auto">單位: 日</td></tr><tr><td colSpan="1" rowSpan="1" width="auto">時間</td><td colSpan="1" rowSpan="1" width="auto">+ 或 - 數值</td><td colSpan="1" rowSpan="1" width="auto">時間</td><td colSpan="1" rowSpan="1" width="auto">"Select time '20:01:08' - 57.5 From dev"</td><td colSpan="1" rowSpan="1" width="auto">單位: 秒</td></tr><tr><td colSpan="1" rowSpan="1" width="auto">時間戳</td><td colSpan="1" rowSpan="1" width="auto">+ 或 - 數值</td><td colSpan="1" rowSpan="1" width="auto">時間戳</td><td colSpan="1" rowSpan="1" width="auto">"Select timestamp '2024-01-10 20:01:08' - 86399 From dev"</td><td colSpan="1" rowSpan="1" width="auto">單位: 秒</td></tr><tr><td colSpan="1" rowSpan="1" width="auto">文字</td><td colSpan="1" rowSpan="1" width="auto">+ 或 - 數值</td><td colSpan="1" rowSpan="1" width="auto">數值</td><td colSpan="1" rowSpan="1" width="auto">"Select '2024-01-10' - 86399 From dev"</td><td colSpan="1" rowSpan="1" width="auto">文字會先被處理成數值，<br>如 FileMaker 的 getAsNumber</td></tr></tbody></table><p><br></p>

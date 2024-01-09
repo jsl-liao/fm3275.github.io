@@ -1,0 +1,66 @@
+/*
+  • subject:
+    check if table name and field names violate sql reserved words
+  • format:
+    cf_chkNamesBySql
+  • parameters:
+    
+  • returns:
+    value list
+  • dependencies: on other cfs, variables, table, fields, scheme or ...
+    constant: co_sqlWords
+  • version:
+    v02
+  • date:
+    20231213
+  • update infomation:
+    using filemaker system table: FileMaker_Tables, FileMaker_Fields
+  • notes:
+    co_sqlWords 從檔案 co_sqlWords.json 取得
+  • repo:
+   
+  • initial:
+    20210708
+  • by:
+    jeff liao
+*/
+
+Let (
+  [
+    ~baseTableNameList = ExecuteSQL ("SELECT BaseTableName FROM FileMaker_Tables" ; "" ; "");
+    ~baseTableNameList = UniqueValues ( ~baseTableNameList );
+    ~tableNameList = ExecuteSQL ("SELECT tableName FROM FileMaker_Tables" ; "" ; "");
+    ~sqlWordList = JSONListValues ( co_sqlWords; ".");
+    ~tableNameCheck = FilterValues ( ~tableNameList ; ~sqlWordList );
+    ~tableNameCheck = If ( IsEmpty(~tableNameCheck) ;
+      "table name check: no violation found";
+      "table name check:" & ¶ & FilterValues ( ~tableNameList ; ~sqlWordList ));
+    ~fieldNameCheck = 
+      While (
+        [
+          ~i = 1 ;
+          ~end = ValueCount ( ~baseTableNameList );
+          ~result = ""
+        ];
+        ~i <= ~end ;
+        [
+          ~baseTableName = GetValue ( ~baseTableNameList ; ~i );
+          ~fieldNameList = ExecuteSQL ( "Select fieldName from filemaker_fields Where tablename =?" ; "" ; "" ; ~baseTableName );
+          ~fieldCheck = FilterValues ( ~fieldNameList ; ~sqlWordList ) ;
+          ~fieldCheck = If ( IsEmpty(~fieldCheck) ; 
+            "field name check on table « " & ~baseTableName & " »: no violation found" ;
+            "field name check on table « " & ~baseTableName & " »: violation found as below,¶" & ~fieldCheck );
+          ~result = ~result & ~fieldCheck ;
+          ~i = ~i + 1
+        ];
+        ~result
+      )
+  ];
+  ~tableNameCheck & ¶ & ~fieldNameCheck
+)
+
+/* return: normal condition
+table name check: no violation found
+field name check on table « help »: no violation found
+field name check on table « dev »: no violation found
+*/
